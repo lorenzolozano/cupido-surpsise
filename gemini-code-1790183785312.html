@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serenatas de Cupido 💘</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rosa-principal: #ff4d6d;
+      --rosa-oscuro: #c9184a;
+      --rosa-pastel: #fff0f3;
+      --blanco: #ffffff;
+      --texto: #590d22;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffccd5 0%, #ff4d6d 100%);
+      color: var(--texto);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      width: 100%;
+      max-width: 550px;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 3px solid var(--rosa-principal);
+    }
+
+    .container::before {
+      content: '💘';
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      font-size: 50px;
+      transform: rotate(-20deg);
+    }
+
+    .container::after {
+      content: '🏹';
+      position: absolute;
+      bottom: -15px;
+      right: -15px;
+      font-size: 50px;
+      transform: rotate(15deg);
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.2rem;
+      color: var(--rosa-oscuro);
+      margin-bottom: 5px;
+    }
+
+    .subtitulo {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--rosa-principal);
+      margin-bottom: 20px;
+    }
+
+    .historia-cupido {
+      background: var(--rosa-pastel);
+      border-radius: 12px;
+      padding: 15px;
+      font-size: 0.9rem;
+      margin-bottom: 25px;
+      border-left: 4px solid var(--rosa-oscuro);
+      text-align: left;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ffb3c1;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--rosa-oscuro);
+    }
+
+    select option:disabled {
+      color: #aaa;
+      background-color: #f2f2f2;
+    }
+
+    /* Calendario Visual */
+    .calendario-box {
+      background: var(--rosa-pastel);
+      border: 2px dashed var(--rosa-principal);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .calendario-header {
+      font-weight: 700;
+      color: var(--rosa-oscuro);
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .dias-semana, .dias-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+      font-size: 0.8rem;
+    }
+
+    .dias-semana div {
+      font-weight: 700;
+      color: var(--rosa-oscuro);
+      padding-bottom: 5px;
+    }
+
+    .dia-num {
+      background: var(--blanco);
+      padding: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ffb3c1;
+      font-weight: 600;
+    }
+
+    .dia-num.hoy {
+      background: var(--rosa-principal);
+      color: var(--blanco);
+    }
+
+    button {
+      width: 100%;
+      background: var(--rosa-oscuro);
+      color: var(--blanco);
+      border: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      margin-top: 10px;
+      box-shadow: 0 4px 15px rgba(201, 24, 74, 0.4);
+    }
+
+    button:hover {
+      background: var(--rosa-principal);
+      transform: translateY(-2px);
+    }
+
+    #confirmacion {
+      display: none;
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 2px solid #a5d6a7;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 20px;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      color: var(--rosa-oscuro);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Serenatas de Cupido</h1>
+    <p class="subtitulo">¡Envía amor y música a esa persona especial! 🎶❤️</p>
+
+    <div class="historia-cupido">
+      <p><strong>¿Quién es Cupido?</strong> En la mitología, Cupido es el dios del deseo amoroso. Con sus flechas mágicas es capaz de enamorar a cualquiera. Hoy, sus flechas se convierten en serenatas sorpresa para llenar tus descansos de música y emoción.</p>
+    </div>
+
+    <!-- Calendario de Referencia Visual -->
+    <div class="calendario-box">
+      <div class="calendario-header" id="mesTitulo">Días Disponibles del Mes</div>
+      <div class="dias-semana">
+        <div>L</div><div>M</div><div>M</div><div>J</div><div>V</div><div>S</div><div>D</div>
+      </div>
+      <div class="dias-grid" id="gridDias"></div>
+    </div>
+
+    <form id="cupidoForm">
+      
+      <div class="form-group">
+        <label for="remitente">Tu nombre (De:):</label>
+        <input type="text" id="remitente" name="remitente" placeholder="Ej. Juan Pérez (o Anónimo)" required>
+      </div>
+
+      <div class="form-group">
+        <label for="destinatario">¿Para quién es la sorpresa? (Para:):</label>
+        <input type="text" id="destinatario" name="destinatario" placeholder="Ej. María Gómez (Salón 11-A)" required>
+      </div>
+
+      <!-- Selector de Fecha -->
+      <div class="form-group">
+        <label for="fecha">📅 1. Selecciona el día de la sorpresa:</label>
+        <input type="date" id="fecha" name="fecha" required>
+      </div>
+
+      <!-- Selector de Horarios -->
+      <div class="form-group">
+        <label for="horario">⏰ 2. Elige el turno disponible en el descanso:</label>
+        <select id="horario" name="horario" required>
+          <option value="" disabled selected>Primero selecciona una fecha arriba...</option>
+          
+          <optgroup label="Primer Descanso (10:50 AM - 11:20 AM)">
+            <option value="10:50 AM - 11:00 AM">10:50 AM - 11:00 AM</option>
+            <option value="11:00 AM - 11:10 AM">11:00 AM - 11:10 AM</option>
+            <option value="11:10 AM - 11:20 AM">11:10 AM - 11:20 AM</option>
+          </optgroup>
+
+          <optgroup label="Segundo Descanso (2:00 PM - 2:35 PM)">
+            <option value="2:00 PM - 2:10 PM">2:00 PM - 2:10 PM</option>
+            <option value="2:10 PM - 2:20 PM">2:10 PM - 2:20 PM</option>
+            <option value="2:20 PM - 2:30 PM">2:20 PM - 2:30 PM</option>
+            <option value="2:30 PM - 2:35 PM">2:30 PM - 2:35 PM</option>
+          </optgroup>
+
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="cancion">Canción o mensaje especial (Opcional):</label>
+        <textarea id="cancion" name="cancion" rows="3" placeholder="Ej. Dedicarle 'Mi persona favorita'..."></textarea>
+      </div>
+
+      <button type="submit">🏹 Agendar Serenata</button>
+    </form>
+
+    <div id="confirmacion"></div>
+
+    <footer>
+      <p>Organizado con ❤️ para el colegio.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Configurar fecha mínima
+    const hoy = new Date();
+    const hoyISO = hoy.toISOString().split('T')[0];
+    const fechaInput = document.getElementById('fecha');
+    const horarioSelect = document.getElementById('horario');
+    fechaInput.setAttribute('min', hoyISO);
+
+    // Generar vista mensual
+    const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    document.getElementById('mesTitulo').innerText = `📅 Días de ${meses[hoy.getMonth()]} ${hoy.getFullYear()}`;
+
+    const grid = document.getElementById('gridDias');
+    const totalDias = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 0).getDate();
+    
+    for (let i = 1; i <= totalDias; i++) {
+      const diaDiv = document.createElement('div');
+      diaDiv.className = 'dia-num' + (i === hoy.getDate() ? ' hoy' : '');
+      diaDiv.innerText = i;
+      grid.appendChild(diaDiv);
+    }
+
+    // Obtener reservas guardadas del almacenamiento local
+    function obtenerReservas() {
+      return JSON.parse(localStorage.getItem('reservasCupido')) || [];
+    }
+
+    // Actualizar la lista de horarios cuando el estudiante cambia la fecha
+    fechaInput.addEventListener('change', function() {
+      const fechaSeleccionada = this.value;
+      const reservas = obtenerReservas();
+
+      // Habilitar todas las opciones por defecto
+      Array.from(horarioSelect.options).forEach(option => {
+        if (option.value !== "") {
+          option.disabled = false;
+          option.text = option.value;
+        }
+      });
+
+      // Deshabilitar los turnos que ya estén ocupados en la fecha seleccionada
+      reservas.forEach(reserva => {
+        if (reserva.fecha === fechaSeleccionada) {
+          Array.from(horarioSelect.options).forEach(option => {
+            if (option.value === reserva.turno) {
+              option.disabled = true;
+              option.text = `${option.value} (❌ OCUPADO)`;
+            }
+          });
+        }
+      });
+
+      horarioSelect.value = "";
+    });
+
+    // Guardar la reserva
+    document.getElementById('cupidoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const de = document.getElementById('remitente').value;
+      const para = document.getElementById('destinatario').value;
+      const fecha = fechaInput.value;
+      const turno = horarioSelect.value;
+
+      // Guardar en la lista
+      const reservas = obtenerReservas();
+      reservas.push({ fecha, turno, de, para });
+      localStorage.setItem('reservasCupido', JSON.stringify(reservas));
+
+      // Mostrar confirmación
+      const confirmacion = document.getElementById('confirmacion');
+      confirmacion.style.display = 'block';
+      confirmacion.innerHTML = `
+        <strong>💘 ¡Reserva Confirmada!</strong><br><br>
+        • <strong>De:</strong> ${de}<br>
+        • <strong>Para:</strong> ${para}<br>
+        • <strong>Fecha:</strong> ${fecha}<br>
+        • <strong>Turno:</strong> ${turno}<br><br>
+        <em>¡Este turno ha quedado bloqueado para otros estudiantes!</em>
+      `;
+
+      this.reset();
+      // Refrescar el selector para bloquear el turno recién guardado
+      fechaInput.dispatchEvent(new Event('change'));
+    });
+  </script>
+
+</body>
+</html>
